@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,8 +23,5 @@ Auth::routes();
 //Route::middleware('superAdmin')->group(function () {
     Route::get('/superAdmin', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //});
-
-
-Auth::routes();
-
+Route::get('/profile', [UserController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
