@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,8 +22,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//Route::middleware('superAdmin')->group(function () {
-    Route::get('/superAdmin', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-//});
+Route::middleware(['isAdmin', 'auth'])->group(function () {
+    Route::get('/admin', [HomeController::class, 'adminView'])->name('admin');
+});
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/report', [ReportController::class, 'report'])->name('report');
+
+
+
+
 Route::get('/profile', [UserController::class, 'index']);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

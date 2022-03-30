@@ -15,6 +15,10 @@ class UserController extends Controller
             $this->userService = $userService;
     }
 
+    public function userRoleCheck() {
+        $this->userService->checkUserRole();
+    }
+
 
     public function index() {
         if (Auth::user()->role_id == 1) {
