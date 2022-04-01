@@ -34,11 +34,17 @@
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
-                        <a href="#" class="nav-link active" aria-current="page">
-                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#"></use></svg>
-                            <Reports></Reports>
+                        <a href="/reports" class="nav-link @if(\Request::segment(1) == "reports") active @endif" aria-current="page">
+                           Reports
                         </a>
                     </li>
+                    @if(Auth::user()->role_id == 2)
+                    <li class="nav-item mt-1">
+                        <a href="/users" class="nav-link @if(\Request::segment(1) == "users") active @endif" aria-current="page">
+                            User
+                        </a>
+                    </li>
+                        @endif
                 </ul>
                 <hr>
                 <div class="dropdown">
@@ -47,7 +53,7 @@
                         <strong>mdo</strong>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1" style="">
-                        <li><a class="dropdown-item" href="#">Change Password</a></li>
+                        <li><a class="dropdown-item" href="profile/changePassword">Change Password</a></li>
                         <li><a class="dropdown-item" href="profile">Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <form action="logout" id="form" method="post">
@@ -69,5 +75,6 @@
                 document.getElementById('form').submit()
             }
     </script>
+    @yield('script')
 </body>
 </html>

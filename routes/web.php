@@ -21,14 +21,18 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-Route::middleware(['isAdmin', 'auth'])->group(function () {
-    Route::get('/admin', [HomeController::class, 'adminView'])->name('admin');
-});
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/report', [ReportController::class, 'report'])->name('report');
+Route::get('/reports', [ReportController::class, 'report'])->name('report');
+Route::post('/reports/search', [ReportController::class, 'searchUser']);
+Route::resource('report', ReportController::class);
 
-
-
-
+Route::middleware('superAdmin')->group( function() {
+    Route::get('/users', [UserController::class, 'getUsers']);
+    Route::resource('user', UserController::class);
+});
+Route::get('/profile/changePassword', function () {
+    return view('passwordChange');
+});
+Route::post('/profile/changePassword', [UserController::class, 'changePassword']);
 Route::get('/profile', [UserController::class, 'index']);
+Route::post('/profile/update', [UserController::class, 'profileUpdate']);

@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('report', function (Blueprint $table) {
+        Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->unique('load');
             $table->integer('load');
@@ -21,6 +21,7 @@ return new class extends Migration
             $table->float('percent');
             $table->integer('driven_rate');
             $table->integer('rate_balance');
+            $table->integer('user_id');
             $table->integer('rate_minus_percent');
             $table->timestamps();
         });
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('report');
+        Schema::dropIfExists('reports');
     }
 };

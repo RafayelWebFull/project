@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class isAdmin
+class isSuperAdmin
 {
     /**
      * Handle an incoming request.
@@ -17,9 +17,9 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->role_id == 2 || Auth::user()->role_id == 1) {
-            return view('admin.index');
+        if(Auth::user() && Auth::user()->role_id == 2) {
+            return $next($request);
         }
-        return $next($request);
+        return redirect('/home');
     }
 }

@@ -1,3 +1,6 @@
 .dashboard-sidebar {
     width: 500px;
 }
+.is_invalid {
+    background: red;
+}
